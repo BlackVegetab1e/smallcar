@@ -1,0 +1,13 @@
+global_costmap:
+  global_frame: map
+  robot_base_frame: base_footprint
+  update_frequency: 1.0  # 全局地图,通常会设定一个相对较小、在1.0到5.0之间的值。 单位为赫兹
+  publish_frequency: 0.5 # 对于静态的全局地图来说,不需要不断发布
+  static_map: true
+ 
+  transform_tolerance: 0.5
+ 
+  plugins:
+    - {name: static_layer,            type: "costmap_2d::StaticLayer"}
+    - {name: obstacle_layer,          type: "costmap_2d::VoxelLayer"}
+    - {name: inflation_layer,         type: "costmap_2d::InflationLayer"}

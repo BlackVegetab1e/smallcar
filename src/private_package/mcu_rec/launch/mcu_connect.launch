@@ -1,0 +1,7 @@
+<launch>
+    <rosparam command="load" file="$(find mcu_rec)/config/imu.yaml" />
+    
+    <group ns="mcu_rec">
+        <node name="mcu_com_ros" pkg="mcu_rec" type="mcu_com_ros" output="screen"/>
+    </group>
+</launch>

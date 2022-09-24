@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db",
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "includePath": [
+                "/opt/ros/noetic/include/**",
+                "/usr/include/**",
+                "${workspaceFolder}/src/private_package/mcu_rec/include",
+                "${workspaceFolder}/src/private_package/motor_serial/include"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "gcc-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "c++14"
+        }
+    ],
+    "version": 4
+}

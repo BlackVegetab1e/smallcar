@@ -1,0 +1,142 @@
+<robot name="smallcar">
+
+    <link name="base_footprint">
+        <visual>
+            <geometry>
+                <sphere radius="0.0001" />
+            </geometry>
+        </visual>
+    </link>
+
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.46 0.3 0.15" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+        
+        <material name="blue">
+                <color rgba="0.01 0.3 0.6 1.0" />
+        </material>
+        </visual>
+  
+    </link>
+
+    <joint name="base_link2base_footprint" type="fixed">
+        <parent link="base_footprint" />
+        <child link="base_link" />
+        <origin xyz="-0.135 0 0.1085" />
+    </joint>
+
+
+
+
+
+
+    <link name="wheelL">
+        <visual>
+            <geometry>
+                <cylinder radius="0.0625" length="0.03" />s
+            </geometry>
+            <origin xyz="0 0 0" rpy="1.5705 0 0" />
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+    </link>
+
+
+    <link name="wheelR">
+        <visual>
+            <geometry>
+                <cylinder radius="0.0625" length="0.03" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="1.5705 0 0" />
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+    </link>
+
+    <joint name="wheelL2base_link" type="continuous">
+        <parent link="base_link" />
+        <child link="wheelL" />
+        <origin xyz="0.135 0.16 -0.046" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+    <joint name="wheelR2base_link" type="continuous">
+        <parent link="base_link" />
+        <child link="wheelR" />
+        <origin xyz="0.135 -0.16 -0.046" rpy="0 0 0" />
+        <axis xyz="0 1 0" />
+    </joint>
+
+
+
+
+
+
+    <link name="backLeft_wheel">
+        <visual>
+            <geometry>
+                <sphere radius="0.029" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+    </link>
+
+    <joint name="backLeft_wheel2base_link" type="continuous">
+        <parent link="base_link" />
+        <child link="backLeft_wheel" />
+        <origin xyz="-0.15 0.0475 -0.075" />
+        <axis xyz="1 1 1" />
+    </joint>
+
+    <link name="backRight_wheel">
+        <visual>
+            <geometry>
+                <sphere radius="0.029" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="black">
+                <color rgba="0.0 0.0 0.0 1.0" />
+            </material>
+        </visual>
+    </link>
+
+    <joint name="backRight_wheel2base_link" type="continuous">
+        <parent link="base_link" />
+        <child link="backRight_wheel" />
+        <origin xyz="-0.15 -0.0475 -0.075" />
+        <axis xyz="1 1 1" />
+    </joint>
+
+
+    <link name="laser">
+        <visual>
+            <geometry>
+                <cylinder radius="0.04" length="0.04" />
+            </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <material name="white">
+                <color rgba="0.99 0.99 0.99 1.0" />
+            </material>
+        </visual>
+    </link>
+
+    <joint name="laser2base_footprint" type="fixed">
+        <parent link="base_footprint" />
+        <child link="laser" />
+        <origin xyz="0.015 0.0 0.17" rpy="0 0 1.5705"/>
+    </joint>
+
+    
+
+
+
+
+</robot>

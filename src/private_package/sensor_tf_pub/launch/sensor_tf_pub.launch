@@ -1,0 +1,6 @@
+<launch>
+    <node name="IMU_tf_publisher" pkg="sensor_tf_pub" type="IMU_tf_publisher" output="screen"/>
+    
+    <include file="$(find sensor_tf_pub)/launch/car_modle.launch" />
+
+</launch>

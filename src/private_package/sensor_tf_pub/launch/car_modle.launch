@@ -1,0 +1,10 @@
+<launch>
+
+    <!-- 设置参数 -->
+    <param name="robot_description" textfile="$(find sensor_tf_pub)/urdf/carBase.urdf" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+    <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" />
+
+</launch>
+

@@ -1,0 +1,29 @@
+# Example configuration:
+# - velocity limits are around a 10% above the physical limits
+# - acceleration limits are just low enough to avoid jerking
+
+# Mandatory parameters
+speed_lim_v: 2.0
+speed_lim_w: 5.4
+
+accel_lim_v: 2
+accel_lim_w: 5
+
+# Optional parameters
+frequency: 10.0
+# Output messages rate. The velocity smoother keeps it regardless incoming messages rate, interpolating whenever necessary.
+decel_factor: 2.0
+# Deceleration/acceleration ratio. Useful to make deceleration more aggressive, for example to safely brake on robots with high inertia.
+
+# Robot velocity feedback type:
+#  0 - none
+#  1 - odometry
+#  2 - end robot commands
+robot_feedback: 0
+
+
+#       // Velocity input no active anymore; normally last command is a zero-velocity one, but reassure
+#       // this, just in case something went wrong with our input, or he just forgot good manners...
+#       // Issue #2, extra check in case cb_avg_time is very big, for example with several atomic commands
+#       // The cb_avg_time > 0 check is required to deal with low-rate simulated time, that can make that
+#       // several messages arrive with the same time and so lead to a zero median

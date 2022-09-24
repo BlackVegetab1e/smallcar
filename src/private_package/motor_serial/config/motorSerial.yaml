@@ -1,0 +1,10 @@
+motor_ctrl:
+  Port: "/dev/ttyS0"             # port name of you serial
+  Baudrate: 19200         # baudrate of the serial
+  
+  wheelRadius: 0.0625         # Radius of the wheel
+  wheelDistance: 0.34     # distance between two wheels
+
+  odomRate: 10
+
+  odomTopicName: "/odom"

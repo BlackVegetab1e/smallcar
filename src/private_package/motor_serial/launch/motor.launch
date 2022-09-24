@@ -1,0 +1,9 @@
+<launch>
+    <rosparam command="load" file="$(find motor_serial)/config/motorSerial.yaml" />
+    
+    <group ns="motor_ctrl">
+        <include file="$(find yocs_velocity_smoother)/launch/standalone.launch" />
+        <node name="carVelocity" pkg="motor_serial" type="carVelocity" output="screen">
+    </node>
+    </group>
+</launch>

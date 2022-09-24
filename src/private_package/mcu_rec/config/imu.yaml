@@ -1,0 +1,6 @@
+mcu_rec:
+  Port: "/dev/ttyS5"             # port name of you mcu
+  Baudrate: 115200         # baudrate of the serial
+
+
+  imu_topic_name: "/imu_raw"

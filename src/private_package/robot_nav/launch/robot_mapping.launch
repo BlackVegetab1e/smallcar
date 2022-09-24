@@ -1,0 +1,7 @@
+<launch>
+    <include file="$(find motion_activate)/launch/motion_activate.launch" />
+    <include file="$(find robot_nav)/launch/gmapping_node.launch" />
+
+    <include file="$(find robot_nav)/launch/amcl.launch" />
+    <include file="$(find robot_nav)/launch/mave_base.launch" />
+</launch>

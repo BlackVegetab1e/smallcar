@@ -20,9 +20,14 @@ void breakGet(std_msgs::Bool breaksig)
     if(breaksig.data == true)
     {
         breaking = true;
+        portArray->CarBreak();
     }
     else
     {
+        if(breaking == true)
+        {
+            portArray->set_vel(0,0);
+        }
         breaking = false;
     }
 }

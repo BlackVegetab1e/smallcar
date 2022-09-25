@@ -6,6 +6,7 @@ import roslib; roslib.load_manifest('teleop_twist_keyboard')
 import rospy
 
 from geometry_msgs.msg import Twist
+from std_msgs.msg import Bool
 
 import sys, select, termios, tty
 
@@ -27,6 +28,9 @@ t : up (+z)
 b : down (-z)
 
 anything else : stop
+
+emergence Stop: b
+cancel Stop: t
 
 q/z : increase/decrease max speeds by 10%
 w/x : increase/decrease only linear speed by 10%
@@ -64,6 +68,12 @@ speedBindings={
         'e':(1,1.1),
         'c':(1,.9),
     }
+breakBindings={
+    'b':(1,1),
+    't':(0,0),
+    'B':(1,1),
+    'T':(0,0),
+}
 
 def getKey():
     tty.setraw(sys.stdin.fileno())
@@ -79,10 +89,11 @@ def vels(speed,turn):
 if __name__=="__main__":
     settings = termios.tcgetattr(sys.stdin)
 
-    pub = rospy.Publisher('smooth_cmd_vel', Twist, queue_size = 1)
+    pub = rospy.Publisher('smooth_cmd_vel', Twist, queue_size = 10)
+    breakPub = rospy.Publisher('/CarBreak', Bool, queue_size=10)
     rospy.init_node('teleop_twist_keyboard')
 
-    speed = rospy.get_param("~speed", 0.3)
+    speed = rospy.get_param("~speed", 0.5)
     turn = rospy.get_param("~turn", 0.6)
     x = 0
     y = 0
@@ -95,6 +106,16 @@ if __name__=="__main__":
         print(vels(speed,turn))
         while(1):
             key = getKey()
+            if key in breakBindings.keys():
+                # rospy.logerr("in")
+                if breakBindings[key][0] == 1:
+                    # rospy.loginfo(1)
+                    breakPub.publish(True)
+                elif breakBindings[key][0] == 0:
+                    # rospy.loginfo(0)
+                    breakPub.publish(False)
+                continue
+
             if key in moveBindings.keys():
                 x = moveBindings[key][0]
                 y = moveBindings[key][1]

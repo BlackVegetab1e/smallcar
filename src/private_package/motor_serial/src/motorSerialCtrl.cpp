@@ -91,20 +91,8 @@ void motorSerialPort::set_vel(int motor1_vel, int motor2_vel)
     }
 
 
-    if(motor2_vel>0)
-    {
-        if(!(this->motor2Mode > 0))
-        {
-            uint8_t set_mode[8]={0x02, 0x06, 0x20, 0x00, 0x00, 0x01};
-            uint16_t CRC = this->factory_crc16(set_mode,6);
-            set_mode[6] = CRC%0x100;
-            set_mode[7] = CRC/0x100;
-            this->serialPort.write(set_mode,sizeof(set_mode)/sizeof(set_mode[0]));
-            ros::Duration(0.02).sleep();
-        }
-        this->motor2Mode = 1;
-    }
-    else if(motor2_vel<=0)
+    
+    if(motor2_vel<=0)
     {
         if(!(this->motor2Mode < 0))
         {
@@ -116,6 +104,19 @@ void motorSerialPort::set_vel(int motor1_vel, int motor2_vel)
             ros::Duration(0.02).sleep();
         }
         this->motor2Mode = -1;
+    }
+    else if(motor2_vel>0)
+    {
+        if(!(this->motor2Mode > 0))
+        {
+            uint8_t set_mode[8]={0x02, 0x06, 0x20, 0x00, 0x00, 0x01};
+            uint16_t CRC = this->factory_crc16(set_mode,6);
+            set_mode[6] = CRC%0x100;
+            set_mode[7] = CRC/0x100;
+            this->serialPort.write(set_mode,sizeof(set_mode)/sizeof(set_mode[0]));
+            ros::Duration(0.02).sleep();
+        }
+        this->motor2Mode = 1;
     }
 
 
@@ -194,11 +195,14 @@ void motorSerialPort::encoder_order(void)
 
 void motorSerialPort::CarBreak(void)
 {
-    uint8_t encode1[8]={0x01, 0x06, 0x20, 0x00, 0x00, 0x09, 0xxxxxx};
+    this->motor1Mode = 0;
+    this->motor2Mode = 0;
+
+    uint8_t encode1[8]={0x01, 0x06, 0x20, 0x00, 0x00, 0x09, 0x42, 0x0c};
     this->serialPort.write(encode1,sizeof(encode1)/sizeof(encode1[0]));
     ros::Duration(0.03).sleep();
 
-    uint8_t encode2[8]={0x02, 0x06, 0x20, 0x00, 0x00, 0x09,0xxxxxxxx};
+    uint8_t encode2[8]={0x02, 0x06, 0x20, 0x00, 0x00, 0x09, 0x42, 0x3F};
     this->serialPort.write(encode2,sizeof(encode2)/sizeof(encode2[0]));
     ros::Duration(0.03).sleep();
 }

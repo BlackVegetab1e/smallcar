@@ -60,7 +60,7 @@ bool right_inited = false;
 
 
 const unsigned long  maxencoder = 0xFFFFFFFF;
-int oneCircleEncoder = 440;
+double oneCircleEncoder = 215.1111111;
 long long last_leftEncoder = 0x0000;
 long long last_rightEncoder = 0x0000;
 long delta_left_pulse = 0x00;

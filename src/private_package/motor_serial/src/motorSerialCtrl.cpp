@@ -121,8 +121,9 @@ void motorSerialPort::set_vel(int motor1_vel, int motor2_vel)
 
 
 
-    u_motor1_vel = abs(motor1_vel*15);
-    u_motor2_vel = abs(motor2_vel*15);
+
+    u_motor1_vel = int(abs((double)motor1_vel*7.33333));
+    u_motor2_vel = int(abs((double)motor2_vel*7.33333));
 
     
     uint8_t set_vel1[8]={0x01, 0x06, 0x20, 0x01};

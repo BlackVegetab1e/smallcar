@@ -8,7 +8,7 @@
   <arg name="raw_cmd_vel_topic"     value="/cmd_vel"/>
   <arg name="smooth_cmd_vel_topic"  value="/smooth_cmd_vel"/>
   <arg name="robot_cmd_vel_topic"   value="robot_cmd_vel"/>
-  <arg name="odom_topic"            value="odom"/>
+  <arg name="odom_topic"            value="/odom"/>
   
   <!-- nodelet manager -->
   <node pkg="nodelet" type="nodelet" name="$(arg nodelet_manager_name)" args="manager"/>

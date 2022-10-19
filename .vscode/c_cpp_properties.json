@@ -9,7 +9,9 @@
                 "/opt/ros/noetic/include/**",
                 "/usr/include/**",
                 "${workspaceFolder}/src/private_package/mcu_rec/include",
-                "${workspaceFolder}/src/private_package/motor_serial/include"
+                "${workspaceFolder}/src/private_package/motor_serial/include",
+                "${workspaceFolder}/src/private_package/Arm_Ctrl/include",
+                "/opt/ros/noetic/include"
             ],
             "name": "ROS",
             "intelliSenseMode": "gcc-x64",

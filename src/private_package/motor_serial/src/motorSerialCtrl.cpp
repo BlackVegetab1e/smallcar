@@ -59,6 +59,7 @@ void motorSerialPort::initSerial(std::string portName, int baudRate)
 
 void motorSerialPort::set_vel(int motor1_vel, int motor2_vel)
 {
+    // ROS_ERROR("left:%d right:%d",motor1_vel,motor2_vel );
     u_int16_t u_motor1_vel;
     u_int16_t u_motor2_vel;
     if(motor1_vel>=0)
@@ -101,7 +102,7 @@ void motorSerialPort::set_vel(int motor1_vel, int motor2_vel)
             set_mode[6] = CRC%0x100;
             set_mode[7] = CRC/0x100;
             this->serialPort.write(set_mode,sizeof(set_mode)/sizeof(set_mode[0]));
-            ros::Duration(0.02).sleep();
+            ros::Duration(0.08).sleep();
         }
         this->motor2Mode = -1;
     }
@@ -114,7 +115,7 @@ void motorSerialPort::set_vel(int motor1_vel, int motor2_vel)
             set_mode[6] = CRC%0x100;
             set_mode[7] = CRC/0x100;
             this->serialPort.write(set_mode,sizeof(set_mode)/sizeof(set_mode[0]));
-            ros::Duration(0.02).sleep();
+            ros::Duration(0.08).sleep();
         }
         this->motor2Mode = 1;
     }
@@ -145,6 +146,9 @@ void motorSerialPort::set_vel(int motor1_vel, int motor2_vel)
     uint16_t CRC2 = this->factory_crc16(set_vel2,6);
     set_vel2[6] = CRC2%0x100;
     set_vel2[7] = CRC2/0x100;
+
+    // ROS_INFO("vel1:%x %x %x %x %x %x",set_vel1[0],set_vel1[1],set_vel1[2],set_vel1[3],set_vel1[4],set_vel1[5]);
+    // ROS_INFO("vel2:%x %x %x %x %x %x",set_vel2[0],set_vel2[1],set_vel2[2],set_vel2[3],set_vel2[4],set_vel2[5]);
 
     this->serialPort.write(set_vel1,sizeof(set_vel1)/sizeof(set_vel1[0]));
     ros::Duration(0.015).sleep();

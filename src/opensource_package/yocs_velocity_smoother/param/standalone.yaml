@@ -6,7 +6,7 @@
 speed_lim_v: 2.0
 speed_lim_w: 5.4
 
-accel_lim_v: 2
+accel_lim_v: 1.4
 accel_lim_w: 5
 
 # Optional parameters
@@ -19,7 +19,7 @@ decel_factor: 2.0
 #  0 - none
 #  1 - odometry
 #  2 - end robot commands
-robot_feedback: 0
+robot_feedback: 1
 
 
 #       // Velocity input no active anymore; normally last command is a zero-velocity one, but reassure

@@ -45,7 +45,7 @@ void recVel(const geometry_msgs::Twist::ConstPtr& velReceive)
         int rpm_left = int((30/PI)*vel_left/wheelRadius);
         int rpm_right = int((30/PI)*vel_right/wheelRadius);
         portArray->set_vel(rpm_left,-rpm_right);
-        // ROS_INFO("%d   %d",rpm_left, rpm_right);
+        // ROS_INFO("%.3f   %.3f",vel_left, vel_right);
     }
     else
     {
@@ -128,7 +128,12 @@ void orderOdom(const ros::TimerEvent& event)
                         
                         last_rightEncoder = rightEncoder;
                         }}}
+
         }
+        ROS_INFO("left$%lld$ right#%lld#", last_leftEncoder, last_rightEncoder);
+
+
+
     }
 }
 

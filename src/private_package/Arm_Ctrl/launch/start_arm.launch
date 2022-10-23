@@ -1,0 +1,7 @@
+<launch>
+    <rosparam command="load" file="$(find Arm_Ctrl)/config/arm_setting.yaml" />
+    
+    <group ns="arm_ctrl">
+        <node name="Arm_Ctrl" pkg="Arm_Ctrl" type="Arm_Ctrl" output="screen"/>
+    </group>
+</launch>

@@ -14,10 +14,23 @@ void mySignitHandler(int sig)
 
 }
 
-
 bool process_Arm(Arm_Ctrl::arm_service::Request& req, Arm_Ctrl::arm_service::Response& resp)
 {
-    if(req.type == "arm")
+    if(req.type == "combine_grab")
+    {
+        my_arm_ctrl->set_arm_angle(req.value);
+        ros::Duration(0.2).sleep();
+        my_arm_ctrl->set_lock(1);
+        ros::Duration(0.2).sleep();
+        my_arm_ctrl->set_arm_angle(0x0);
+    }
+    else if(req.type == "combine_shoot")
+    {
+        my_arm_ctrl->set_arm_angle(0x0a);
+        ros::Duration(0.2).sleep();
+        my_arm_ctrl->set_lock(0);
+    }
+    else if(req.type == "arm")
     {
         my_arm_ctrl->set_arm_angle(req.value);
     }
@@ -25,6 +38,7 @@ bool process_Arm(Arm_Ctrl::arm_service::Request& req, Arm_Ctrl::arm_service::Res
     {
         my_arm_ctrl->set_lock(req.value);
     }
+
     return true;
 }
 
@@ -39,15 +53,15 @@ int main(int argc, char** argv)
 
     int baudRate = 0;
     std::string port;
-    ros::param::get("Arm_baudRate", baudRate);
-    ros::param::get("Arm_port", port);
+    ros::param::get("Baudrate", baudRate);
+    ros::param::get("Port", port);
     
     arm_ctrl arm(baudRate, port);
     my_arm_ctrl = &arm;
 
     
 
-    ros::ServiceServer arm_service = n.advertiseService("Arm_actions", process_Arm);
+    ros::ServiceServer arm_service = n.advertiseService("/Arm_actions", process_Arm);
 
     ros::spin();
 }

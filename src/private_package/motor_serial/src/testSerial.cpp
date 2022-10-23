@@ -40,7 +40,7 @@ int main(int argc, char** argv)
     ros::init(argc, argv, "serial_test");
     ros::NodeHandle n;
     
-    sp.setPort("/dev/ttyS0");
+    sp.setPort("/dev/ttyS2");
     sp.setBaudrate(19200);
     sp.setTimeout(to);
 
@@ -81,14 +81,14 @@ int main(int argc, char** argv)
     while(ros::ok())
     {
         // uint8_t sp_buff[12] ={0x02, 0x06, 0x20, 0x00, 0x00, 0x05};
-        uint8_t sp_buff[12] ={0x02, 0x06, 0x20, 0x05, 0x00, 0x02};
-        uint16_t CRC = crc16(sp_buff, 6);
-        sp_buff[6] = CRC%0x100;
-        sp_buff[7] = CRC/0x100;
+        // uint8_t sp_buff[12] ={0x02, 0x06, 0x20, 0x05, 0x00, 0x02};
+        // uint16_t CRC = crc16(sp_buff, 6);
+        // sp_buff[6] = CRC%0x100;
+        // sp_buff[7] = CRC/0x100;
 
         ros::Duration(0.1).sleep();
 
-        sp.write(sp_buff,8);
+        // sp.write(sp_buff,8);
 
     
         //获取缓冲区内的字节数

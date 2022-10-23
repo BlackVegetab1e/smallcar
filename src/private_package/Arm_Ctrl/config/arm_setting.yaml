@@ -1,0 +1,6 @@
+arm_ctrl:
+  Port: "/dev/ttyS2"             # port name of you Arm
+  Baudrate: 19200         # baudrate of the serial
+
+
+  imu_topic_name: "/imu_raw"

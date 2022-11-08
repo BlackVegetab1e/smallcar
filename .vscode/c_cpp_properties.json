@@ -12,7 +12,8 @@
                 "${workspaceFolder}/src/private_package/motor_serial/include",
                 "${workspaceFolder}/src/private_package/Arm_Ctrl/include",
                 "/opt/ros/noetic/include",
-                "${workspaceFolder}/devel/include"
+                "${workspaceFolder}/devel/include",
+                "${workspaceFolder}/src/private_package/motor_control/include"
             ],
             "name": "ROS",
             "intelliSenseMode": "gcc-x64",

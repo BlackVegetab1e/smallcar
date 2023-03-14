@@ -1,7 +1,7 @@
 <launch>
     <group ns="base_drive">
         <include file="$(find mcu_rec)/launch/mcu_connect.launch"/>
-        <include file="$(find motor_serial)/launch/motor.launch"/>
+        <include file="$(find motor_control)/launch/start_motor.launch"/>
         <include file="$(find robot_pose_ekf)/robot_pose_ekf.launch"/>
         <include file="$(find Arm_Ctrl)/launch/start_arm.launch"/>
     </group>

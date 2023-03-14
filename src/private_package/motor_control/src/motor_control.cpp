@@ -12,15 +12,12 @@ void motor_control::startMotor(ros::NodeHandle &nh)
 {
     ros::param::get("wheel_diatance", this->wheel_diatance);
     ros::param::get("wheel_diameter", this->wheel_diameter);
-    this->wheel_diatance = 0.3;
-    this->wheel_diameter = 0.15;
     this->set_vel(0,0);
     this->enable_motor(false);
     this->set_vel(0,0);
     this->enable_motor(true);
+    
     ROS_INFO("Motor Started");
-
-
     this->_nh = &nh;
     this->_vel_sub = this->_nh->subscribe("/cmd_vel", 10, &motor_control::receive_vel, this);
 
@@ -29,7 +26,7 @@ void motor_control::startMotor(ros::NodeHandle &nh)
 
 void motor_control::receive_vel(const geometry_msgs::Twist::ConstPtr& msg)
 {
-    ROS_INFO("%.3f %.3f", msg->linear.x, msg->angular.z);
+    // ROS_INFO("%.3f %.3f", msg->linear.x, msg->angular.z);
     double V_right = (2*msg->linear.x + msg->angular.z * this->wheel_diatance)/2;
     double V_left  = (2*msg->linear.x - msg->angular.z * this->wheel_diatance)/2;
 
@@ -39,7 +36,7 @@ void motor_control::receive_vel(const geometry_msgs::Twist::ConstPtr& msg)
     uint16_t right_speed = (uint16_t) N_right;
     uint16_t left_speed = (uint16_t) N_left;
     this->set_vel(left_speed, right_speed);
-    ROS_INFO("%d %d", left_speed, right_speed);
+    // ROS_INFO("%d %d", left_speed, right_speed);
 
 
 }
@@ -95,7 +92,7 @@ void motor_control::set_vel(uint16_t motor1_vel, uint16_t motor2_vel)
     send_msg[10] = crc16_check%0x100;
     send_msg[11] = crc16_check/0x100;
     this->serialPort.write(send_msg, sizeof(send_msg)/sizeof(send_msg[0]));
-    ros::Duration(0.005).sleep();
+    ros::Duration(0.003).sleep();
 
 }
 
@@ -136,7 +133,7 @@ void motor_control::enable_motor(bool enable)
     send_msg[10] = crc16_check%0x100;
     send_msg[11] = crc16_check/0x100;
     this->serialPort.write(send_msg, sizeof(send_msg)/sizeof(send_msg[0]));
-    ros::Duration(0.1).sleep();
+    ros::Duration(0.05).sleep();
 
 }
 

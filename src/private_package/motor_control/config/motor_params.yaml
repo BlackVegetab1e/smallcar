@@ -1,0 +1,5 @@
+wheel_diameter: 0.13
+wheel_diatance: 0.34
+encoder_number: 5600
+odom_rate: 20
+odom_pub_topic: "odom_raw"

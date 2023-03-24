@@ -8,4 +8,5 @@
     
     <include file="$(find sensor_tf_pub)/launch/sensor_tf_pub.launch"/>
     <include file="$(find rplidar_ros)/launch/rplidar_a3.launch"/>
+    <!-- <remap from="/base_drive/motor_ctrl/odom" to="/odom" /> -->
 </launch>

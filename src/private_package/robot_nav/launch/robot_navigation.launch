@@ -1,9 +1,11 @@
 <launch>
     <!-- 运行地图服务器，并且加载设置的地图-->
-    <arg name="map_name" default="lab.yaml" />
+    <arg name="map_name" default="test.yaml" />
     <node name="map_server" pkg="map_server" type="map_server" args="$(find robot_nav)/maps/$(arg map_name)"/>
 
     <include file="$(find motion_activate)/launch/motion_activate.launch" />
     <include file="$(find robot_nav)/launch/amcl.launch" />
     <include file="$(find robot_nav)/launch/mave_base.launch" />
+    <!-- <include file="$(find robot_nav)/launch/gmapping_node.launch" /> -->
+    <!-- <remap from="odom" to="/base_drive/motor_ctrl/odom" /> -->
 </launch>

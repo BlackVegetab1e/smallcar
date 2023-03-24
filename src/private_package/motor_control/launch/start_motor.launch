@@ -1,6 +1,6 @@
-<launch>
-    
-    
+<launch>  
+
+
     <group ns="motor_ctrl">
         <rosparam command="load" file="$(find motor_control)/config/motor_params.yaml" />
         <node name="smotor_control_node" pkg="motor_control" type="motor_control_node" output="screen"/>

@@ -34,9 +34,9 @@ void odom_pub::start_odom(ros::NodeHandle &nh)
 
     ros::Duration(0.2).sleep();
     double odomDurition = 1.0/_odom_rate;
-    ROS_INFO("odom rate:%.1f", _odom_rate);
+    ROS_INFO("odom rate:%d", _odom_rate);
 
-    _odom_publisher = nh.advertise<nav_msgs::Odometry>(_odom_topic, 10);
+    _odom_publisher = nh.advertise<nav_msgs::Odometry>(_odom_topic, 20);
     ros::Timer odom_order = nh.createTimer(ros::Duration(odomDurition), &odom_pub::order_odom, this);
     ros::spin();
 }
@@ -245,7 +245,7 @@ void odom_pub::pub_odom(uint16_t left, uint16_t right)
 
     nav_msgs::Odometry odom;
     odom.header.stamp = ros::Time::now();
-    odom.header.frame_id = "odom";
+    odom.header.frame_id = "odom_combined";
 
     odom.pose.pose.position.x = _x;
     odom.pose.pose.position.y = _y;

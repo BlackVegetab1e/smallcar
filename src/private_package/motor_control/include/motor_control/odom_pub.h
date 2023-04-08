@@ -10,8 +10,8 @@
 #include<geometry_msgs/TransformStamped.h>
 #include<tf/tf.h>
 #include<tf/transform_broadcaster.h>
-#include<geometry_msgs/TwistWithCovariance.h>
 #include "tf2_ros/transform_broadcaster.h"
+#include<geometry_msgs/TwistWithCovariance.h>
 #include<std_msgs/Bool.h>
 
 #define PI 3.141592653589793
@@ -33,6 +33,7 @@ class odom_pub
         
 
         ros::Publisher _odom_publisher;
+        tf2_ros::TransformBroadcaster broadcaster;
 
         std::string _odom_topic;
         int _odom_rate;

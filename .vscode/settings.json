@@ -74,5 +74,6 @@
         "typeinfo": "cpp",
         "variant": "cpp",
         "bit": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "${workspaceFolder}/src/opensource_package/imu_tools-noetic/imu_tools"
 }

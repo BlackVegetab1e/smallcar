@@ -27,10 +27,10 @@ void motor_control::startMotor(ros::NodeHandle &nh)
 void motor_control::receive_vel(const geometry_msgs::Twist::ConstPtr& msg)
 {
     // ROS_INFO("%.3f %.3f", msg->linear.x, msg->angular.z);
-    double V_right = (msg->linear.x + msg->angular.z * this->wheel_diatance)/2; //电机转速与小车速度和角速度关系
-    double V_left  = (msg->linear.x - msg->angular.z * this->wheel_diatance)/2;
+    double V_right = (2*msg->linear.x + msg->angular.z * this->wheel_diatance)/2;
+    double V_left  = (2*msg->linear.x - msg->angular.z * this->wheel_diatance)/2;
 
-    double N_right = 60*V_right/(PI * this->wheel_diameter);  //换算成每秒转速
+    double N_right = 60*V_right/(PI * this->wheel_diameter);
     double N_left  = 60*V_left /(PI * this->wheel_diameter);
 
     uint16_t right_speed = (uint16_t) N_right;

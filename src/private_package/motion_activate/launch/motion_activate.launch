@@ -2,11 +2,10 @@
     <group ns="base_drive">
         <include file="$(find mcu_rec)/launch/mcu_connect.launch"/>
         <include file="$(find motor_control)/launch/start_motor.launch"/>
-        <include file="$(find robot_pose_ekf)/robot_pose_ekf.launch"/>
+        <!-- <include file="$(find robot_pose_ekf)/robot_pose_ekf.launch"/> -->
         <include file="$(find Arm_Ctrl)/launch/start_arm.launch"/>
     </group>
     
     <include file="$(find sensor_tf_pub)/launch/sensor_tf_pub.launch"/>
     <include file="$(find rplidar_ros)/launch/rplidar_a3.launch"/>
-    <!-- <remap from="/base_drive/motor_ctrl/odom" to="/odom" /> -->
 </launch>

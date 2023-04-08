@@ -6,6 +6,7 @@
         "limitSymbolsToIncludedHeaders": false
       },
       "includePath": [
+        "/home/xjk/smallCar/devel/include/**",
         "/opt/ros/noetic/include/**",
         "/usr/include/**"
       ],

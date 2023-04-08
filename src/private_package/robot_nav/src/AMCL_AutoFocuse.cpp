@@ -10,14 +10,11 @@ void startFocusing(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr& Ini
     // ROS_ERROR("IN");
     for(int i = 0 ; i< 25; i++)
     {
-        // ROS_INFO("%d", i);
+        ROS_INFO("%d", i);
         std_srvs::Empty message;
         FocusOrderPointer->call(message);
         ros::Duration(0.1).sleep();
     }
-    
-
-
 
 }
 

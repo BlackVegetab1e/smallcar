@@ -1,7 +1,6 @@
 #include <motor_control/odom_pub.h>
 
 
-
 odom_pub::odom_pub(std::string portName, int baudRate):
 _portName(portName),
 _baudRate(baudRate)
@@ -34,9 +33,9 @@ void odom_pub::start_odom(ros::NodeHandle &nh)
 
     ros::Duration(0.2).sleep();
     double odomDurition = 1.0/_odom_rate;
-    ROS_INFO("odom rate:%d", _odom_rate);
+    ROS_INFO("odom rate:%.1f", _odom_rate);
 
-    _odom_publisher = nh.advertise<nav_msgs::Odometry>(_odom_topic, 20);
+    _odom_publisher = nh.advertise<nav_msgs::Odometry>(_odom_topic, 10);
     ros::Timer odom_order = nh.createTimer(ros::Duration(odomDurition), &odom_pub::order_odom, this);
     ros::spin();
 }
@@ -81,7 +80,7 @@ void odom_pub::order_odom(const ros::TimerEvent& time_event)
         {
             uint16_t left_encoder  = buffer[first_byte_at+6]*0x100 + buffer[first_byte_at+7];
             uint16_t right_encoder = buffer[first_byte_at+8]*0x100 + buffer[first_byte_at+9];
-
+            
             this->pub_odom(left_encoder, right_encoder);
         }
     }
@@ -245,7 +244,7 @@ void odom_pub::pub_odom(uint16_t left, uint16_t right)
 
     nav_msgs::Odometry odom;
     odom.header.stamp = ros::Time::now();
-    odom.header.frame_id = "odom_combined";
+    odom.header.frame_id = "odom";
 
     odom.pose.pose.position.x = _x;
     odom.pose.pose.position.y = _y;
@@ -270,6 +269,25 @@ void odom_pub::pub_odom(uint16_t left, uint16_t right)
     }
             
 
-    // ROS_WARN("%ld %ld",delta_left_pulse,delta_right_pulse);
+
     _odom_publisher.publish(odom);    //发布odom数据
+    geometry_msgs::TransformStamped tfs;
+    //  |----头设置
+    tfs.header.frame_id = "odom";
+    tfs.header.stamp = ros::Time::now();
+
+    //  |----坐标系 ID
+    tfs.child_frame_id = "base_footprint";
+
+    //  |----坐标系相对信息设置
+    tfs.transform.translation.x = _x;
+    tfs.transform.translation.y = _y;
+    tfs.transform.translation.z = 0.0; // 二维实现，pose 中没有z，z 是 0
+    //  |--------- 四元数设置
+    tfs.transform.rotation = odom_quat;
+
+
+    //  5-3.广播器发布数据
+    // std::cout<<tfs;
+    broadcaster.sendTransform(tfs);
 }
